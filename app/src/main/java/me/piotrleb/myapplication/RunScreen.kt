@@ -26,10 +26,8 @@ import com.google.maps.android.compose.MapUiSettings
 import com.google.maps.android.compose.Polyline
 import me.piotrleb.myapplication.RunViewModel
 import me.piotrleb.myapplication.ui.theme.*
-import androidx.compose.ui.draw.blur
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Stop
-import androidx.compose.ui.platform.LocalContext
 
 
 @Composable
@@ -57,14 +55,10 @@ fun RunScreen(viewModel: RunViewModel = viewModel()) {
             )
         }
 
-        // 2. OVERLAY - STATYSTYKI (Glassmorphism)
         Column(
             modifier = Modifier.fillMaxSize().padding(20.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            // Top Bar
-
-            // Centralna Karta - Tylko najważniejsze dane, półprzezroczyste
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -88,7 +82,6 @@ fun RunScreen(viewModel: RunViewModel = viewModel()) {
                 }
             }
 
-            // 3. PRZYCISK AKCJI
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 StartButtonLarge(isRunning) { viewModel.toggleRun(context) }
             }
@@ -112,7 +105,6 @@ fun StartButtonLarge(isRunning: Boolean, onClick: () -> Unit) {
         modifier = Modifier.padding(bottom = 24.dp)
     ) {
         Box(contentAlignment = Alignment.Center) {
-            // Neonowa poświata (Glow effect)
             Box(
                 modifier = Modifier
                     .size(90.dp)
@@ -123,7 +115,6 @@ fun StartButtonLarge(isRunning: Boolean, onClick: () -> Unit) {
                     )
             )
 
-            // Główny przycisk
             Button(
                 onClick = onClick,
                 modifier = Modifier.size(84.dp),
@@ -153,19 +144,4 @@ fun StartButtonLarge(isRunning: Boolean, onClick: () -> Unit) {
             letterSpacing = 2.sp
         )
     }
-}
-object MapStyles {
-    val DARK_JSON = """
-    [
-      { "elementType": "geometry", "stylers": [{ "color": "#212121" }] },
-      { "elementType": "labels.icon", "stylers": [{ "visibility": "off" }] },
-      { "elementType": "labels.text.fill", "stylers": [{ "color": "#757575" }] },
-      { "elementType": "labels.text.stroke", "stylers": [{ "color": "#212121" }] },
-      { "featureType": "administrative", "elementType": "geometry", "stylers": [{ "color": "#757575" }] },
-      { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#181818" }] },
-      { "featureType": "road", "elementType": "geometry.fill", "stylers": [{ "color": "#2c2c2c" }] },
-      { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{ "color": "#8a8a8a" }] },
-      { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#000000" }] }
-    ]
-    """.trimIndent()
 }

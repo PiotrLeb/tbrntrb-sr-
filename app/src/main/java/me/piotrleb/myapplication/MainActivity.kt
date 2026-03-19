@@ -4,8 +4,6 @@ import RunScreen
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import me.piotrleb.myapplication.ui.theme.MyApplicationTheme
 
 class MainActivity : AppCompatActivity() {

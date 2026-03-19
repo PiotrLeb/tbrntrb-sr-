@@ -14,10 +14,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class RunViewModel : ViewModel() {
-    private val _distance = MutableStateFlow(0.0) // w metrach
+    private val _distance = MutableStateFlow(0.0)
     val distance: StateFlow<Double> = _distance.asStateFlow()
 
-    private val _pace = MutableStateFlow(0.0) // minuty na kilometr
+    private val _pace = MutableStateFlow(0.0)
     val pace: StateFlow<Double> = _pace.asStateFlow()
 
     private val _isRunning = MutableStateFlow(false)
@@ -38,7 +38,7 @@ class RunViewModel : ViewModel() {
         }
     }
 
-    @SuppressLint("MissingPermission") // Uprawnienia sprawdzamy w UI
+    @SuppressLint("MissingPermission")
     private fun startRun(context: Context) {
         _isRunning.value = true
         _distance.value = 0.0
@@ -72,10 +72,9 @@ class RunViewModel : ViewModel() {
                     val distanceGained = lastLocation!!.distanceTo(location)
                     _distance.value += distanceGained
 
-                    // Obliczanie tempa (min/km)
                     val timeElapsedMin = (System.currentTimeMillis() - startTime) / 60000.0
                     val distanceKm = _distance.value / 1000.0
-                    if (distanceKm > 0.01) { // żeby uniknąć dzielenia przez zero i kosmicznych wyników
+                    if (distanceKm > 0.01) {
                         _pace.value = timeElapsedMin / distanceKm
                     }
                 }
